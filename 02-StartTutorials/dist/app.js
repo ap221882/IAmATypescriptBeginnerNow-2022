@@ -10,3 +10,4 @@ function printResult(num) {
 let combineValues;
 combineValues = add;
 combineValues(4, 3);
+//# sourceMappingURL=app.js.map
