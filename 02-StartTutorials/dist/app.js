@@ -1,13 +1,57 @@
 "use strict";
-// Functions
-function add(n1, n2) {
-    return n1 + n2;
+class Department {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        // private id: string;
+        // name: string;
+        // private employees: string[] = [];
+        this.employees = [];
+        // this.name = n;
+    }
+    describe() {
+        console.log('Department is: ' + this.name + '  ' + this.id);
+    }
+    addEmployee(employee) {
+        // this.id=0;---readOnly
+        this.employees.push(employee);
+    }
+    printEmployeeInfo() {
+        console.log(this.employees.length);
+        console.log(this.employees);
+    }
 }
-function printResult(num) {
-    console.log(num);
-    // return;//when undefined is used
+const accounting = new Department('1', 'Accounting');
+console.log(accounting);
+accounting.describe();
+accounting.addEmployee('Max');
+accounting.addEmployee('Minny');
+accounting.printEmployeeInfo();
+// accounting.employees--isprivate
+const accountingCopy = { name: 'Ajay', describe: accounting.describe };
+// accountingCopy.describe();
+class ITDepartment extends Department {
+    constructor(id, admins) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+    addEmployee(employee) {
+        if (employee === 'Ajay') {
+            return;
+        }
+        this.employees.push(employee);
+    }
 }
-let combineValues;
-combineValues = add;
-combineValues(4, 3);
+// Protected can be accessed by their inheriting classes
+const accountingIT = new ITDepartment('1', ['Accounting']);
+console.log(accountingIT);
+let person1;
+person1 = {
+    name: 'Ajay',
+    age: 18,
+    greet(message) {
+        console.log('How you doing? ' + person1.name + ' ' + message);
+    },
+};
+person1.greet('hello');
 //# sourceMappingURL=app.js.map
