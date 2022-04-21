@@ -1,57 +1,52 @@
 "use strict";
-class Department {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-        // private id: string;
-        // name: string;
-        // private employees: string[] = [];
-        this.employees = [];
-        // this.name = n;
-    }
-    describe() {
-        console.log('Department is: ' + this.name + '  ' + this.id);
-    }
-    addEmployee(employee) {
-        // this.id=0;---readOnly
-        this.employees.push(employee);
-    }
-    printEmployeeInfo() {
-        console.log(this.employees.length);
-        console.log(this.employees);
-    }
-}
-const accounting = new Department('1', 'Accounting');
-console.log(accounting);
-accounting.describe();
-accounting.addEmployee('Max');
-accounting.addEmployee('Minny');
-accounting.printEmployeeInfo();
-// accounting.employees--isprivate
-const accountingCopy = { name: 'Ajay', describe: accounting.describe };
-// accountingCopy.describe();
-class ITDepartment extends Department {
-    constructor(id, admins) {
-        super(id, 'IT');
-        this.admins = admins;
-    }
-    addEmployee(employee) {
-        if (employee === 'Ajay') {
-            return;
-        }
-        this.employees.push(employee);
-    }
-}
-// Protected can be accessed by their inheriting classes
-const accountingIT = new ITDepartment('1', ['Accounting']);
-console.log(accountingIT);
-let person1;
-person1 = {
-    name: 'Ajay',
-    age: 18,
-    greet(message) {
-        console.log('How you doing? ' + person1.name + ' ' + message);
-    },
+// interface Admin {
+//   name: string;
+//   privileges: string[];
+// }
+// interface Employee {
+//   name: string;
+//   startDate: Date;
+// }
+const el = {
+    name: 'Max',
+    privileges: ['create-server'],
+    startDate: new Date(),
 };
-person1.greet('hello');
+function printEmployeeInformation(emp) {
+    console.log('Name: ' + emp.name);
+    if ('privileges' in emp) {
+        console.log('Privileges: ' + emp.privileges);
+    }
+    if ('startDate' in emp) {
+        console.log('startDate: ' + emp.startDate);
+    }
+}
+printEmployeeInformation(el);
+printEmployeeInformation({ name: 'Ajay', startDate: new Date() });
+class Car {
+    drive() {
+        console.log('Driving');
+    }
+}
+class Truck {
+    drive() {
+        console.log('Driving a truck...');
+    }
+    loadCargo(amount) {
+        console.log('Loading cargo...' + amount);
+    }
+}
+const v1 = new Car();
+const v2 = new Truck();
+function useVehicle(vehicle) {
+    vehicle.drive();
+    if (vehicle instanceof Truck) {
+        vehicle.loadCargo(1000);
+    }
+    // if ('loadCargo' in vehicle) {
+    //   vehicle.loadCargo(1000);
+    // }
+}
+useVehicle(v1);
+useVehicle(v2);
 //# sourceMappingURL=app.js.map
